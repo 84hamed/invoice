@@ -1,54 +1,45 @@
-# invoice
+# Invoice Project - AI Ready
 
-### محتوای فایل index.html
-فایل `index.html` صفحه اصلی برنامه است و یک فرم ورود (login) ساده را نمایش می‌دهد. این صفحه شامل:
+این شاخه از پروژه Invoice برای **دسترسی سریع و تحلیل توسط هوش مصنوعی (AI)** آماده شده است.
 
-- یک فرم با دو ورودی: نام کاربری (username) و رمز عبور (password).
-- دکمه ورود (login).
-- لینک‌هایی برای ثبت‌نام (ثبت نام کنید) و بازیابی رمز عبور (رمز عبور را فراموش کرده‌اید؟).
-- اسکریپت جاوااسکریپت داخلی که اعتبار ورود را چک می‌کند (نام کاربری: admin، رمز عبور: 1234).
-- پس از ورود موفق، کاربر به صفحه `factor.html` هدایت می‌شود.
-- طراحی ساده با CSS خارجی (styles.css) و راست‌چین (RTL) برای پشتیبانی از فارسی.
+## شاخه فعلی
 
-این فایل بیشتر نقش صفحه ورود را دارد و قابلیت اصلی تولید فاکتور در فایل `factor.html` و `script.js` پیاده‌سازی شده است.
+`fast-tracking-files-to-AI`
 
-### قابلیت‌های کلی پروژه (برای اضافه کردن به README.md)
-این پروژه یک **تولیدکننده فاکتور (Invoice Generator) ساده و آفلاین** بر پایه HTML، CSS و JavaScript خالص است. نیازی به سرور یا دیتابیس ندارد و مستقیماً در مرورگر اجرا می‌شود.
+## توضیح پروژه
 
-#### ویژگی‌های اصلی:
-- **ورود ساده به سیستم**: صفحه ورود با نام کاربری `admin` و رمز عبور `1234` (برای امنیت اولیه).
-- **ایجاد فاکتور جدید**: افزودن آیتم‌های متعدد (شرح کالا/خدمات، تعداد، قیمت واحد، تخفیف).
-- **محاسبات خودکار**:
-  - محاسبه مبلغ هر ردیف (با کسر تخفیف).
-  - جمع کل مبلغ خالص، تخفیف کل، مبلغ قبل از مالیات.
-  - اعمال مالیات (به طور پیش‌فرض ۹٪، قابل تغییر).
-  - محاسبه جمع کل نهایی.
-- **قابلیت‌های ویرایشی**:
-  - افزودن ردیف جدید به صورت پویا.
-  - حذف ردیف‌های اضافه‌شده.
-- **چاپ و خروجی**: دکمه چاپ فاکتور که صفحه را به صورت حرفه‌ای پرینت می‌کند (با استفاده از `window.print()`).
-- **طراحی فارسی و راست‌چین (RTL)**: مناسب برای کاربران فارسی‌زبان، با فیلدهای تاریخ شمسی (هرچند تاریخ به صورت دستی وارد می‌شود).
-- **آفلاین و سبک**: کاملاً استاتیک، بدون وابستگی به فریم‌ورک یا کتابخانه خارجی.
+این پروژه یک **سیستم مدیریت و تولید فاکتور (Invoice Generator)** است که امکان مدیریت کالاها، خدمات، قیمت‌ها و محاسبه مجموع پرداختی را فراهم می‌کند.
 
-#### نحوه استفاده:
-1. فایل `index.html` را در مرورگر باز کنید.
-2. با نام کاربری `admin` و رمز `1234` وارد شوید.
-3. اطلاعات مشتری، شماره فاکتور، تاریخ و آیتم‌ها را وارد کنید.
-4. فاکتور را مشاهده، ویرایش و چاپ کنید.
+### امکانات اصلی
 
-این پروژه مناسب برای استفاده شخصی، فریلنسرها یا کسب‌وکارهای کوچک است که نیاز به صدور فاکتور سریع و ساده دارند.
+* افزودن، حذف و ویرایش ردیف‌های کالا و خدمات
+* ذخیره و بارگذاری فاکتورها در LocalStorage و فایل JSON
+* بروزرسانی خودکار قیمت‌ها از URL محصولات
+* محاسبه جمع کل کالاها و خدمات
+* Undo تغییرات و مدیریت خدمات ذخیره‌شده
+* چاپ فاکتور و صادرات به Excel و Word
 
-اگر بخواهی متن دقیق‌تری برای README بنویسم (مثلاً با markdown کامل)، بگو!
-## Raw Source Files
+## ساختار فایل‌ها
 
-### Core
-- script.js  
-  https://raw.githubusercontent.com/84hamed/invoice/main/script.js
+* `index.html` : رابط کاربری HTML
+* `styles.css` : استایل‌ها و طراحی
+* `script.js` : منطق اصلی پروژه (JS)
+* `script.txt` : نسخه متنی ساده کد JS برای AI
+* `README.md` : این فایل توضیحات و راهنمای پروژه
 
-### UI
-- index.html  
-  https://raw.githubusercontent.com/84hamed/invoice/main/index.html
+## لینک فایل‌های Raw برای AI
 
-### Styles
-- style.css  
-  https://raw.githubusercontent.com/84hamed/invoice/main/style.css
+* script.js: [https://raw.githubusercontent.com/84hamed/invoice/fast-tracking-files-to-AI/script.js](https://raw.githubusercontent.com/84hamed/invoice/fast-tracking-files-to-AI/script.js)
+* script.txt: [https://raw.githubusercontent.com/84hamed/invoice/fast-tracking-files-to-AI/script.txt](https://raw.githubusercontent.com/84hamed/invoice/fast-tracking-files-to-AI/script.txt)
+* index.html: [https://raw.githubusercontent.com/84hamed/invoice/fast-tracking-files-to-AI/index.html](https://raw.githubusercontent.com/84hamed/invoice/fast-tracking-files-to-AI/index.html)
+* styles.css: [https://raw.githubusercontent.com/84hamed/invoice/fast-tracking-files-to-AI/styles.css](https://raw.githubusercontent.com/84hamed/invoice/fast-tracking-files-to-AI/styles.css)
+
+## نکات مهم برای AI
+
+* از لینک‌های Raw استفاده کنید تا متن کد بدون هیچ HTML اضافی خوانده شود.
+* برنچ اصلی برای تحلیل AI: `fast-tracking-files-to-AI`
+* فایل `script.txt` نسخه ساده JS است برای دسترسی سریع و آسان به کد.
+
+## مجوز (License)
+
+این پروژه تحت مجوز [MIT License](LICENSE) منتشر شده است.
