@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>فاکتور حرفه‌ای به‌روز</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- بخش مدیریت فاکتورها -->
+  <div class="section">
+    <button class="new-invoice-btn" onclick="newInvoice()">فاکتور جدید</button>
+    <button class="save-btn" onclick="exportCurrentInvoice()">دانلود فاکتور فعلی</button>
+    <input type="file" id="loadFile" accept=".json" style="display: none;" onchange="loadInvoice(event)">
+    <button class="load-btn" onclick="document.getElementById('loadFile').click()">بارگیری فاکتور</button>
+    <button class="update-prices-btn" onclick="updateAllPrices()">به‌روزرسانی قیمت‌ها</button>
+    <button class="undo-btn" id="undoBtn" onclick="undoUpdate()">بازگشت به قبل</button>
+    <button class="print-btn" onclick="printInvoice()">چاپ فاکتور</button>
+    <input type="file" id="printFromFileInput" accept=".json" style="display: none;" onchange="printInvoiceFromFile(event)">
+    <button class="print-btn" onclick="document.getElementById('printFromFileInput').click()">چاپ فاکتور از فایل</button>
+    <button class="save-btn" onclick="exportToExcel()">ذخیره به Excel</button>
+    <button class="save-btn" onclick="exportToWord()">ذخیره به Word</button>
+    <button class="save-btn" onclick="exportToRealExcel()">ذخیره به Excel واقعی</button>
+    <button class="save-btn" onclick="saveDebtCredit()">ذخیره بدهکار/بستانکار</button>
+
+    <label for="fontSizeSelect">سایز فونت چاپ:</label>
+    <select id="fontSizeSelect" onchange="setPrintFontSize(this.value)">
+      <option value="10px">کوچک</option>
+      <option value="12px" selected>متوسط</option>
+      <option value="14px">بزرگ</option>
+    </select>
+
+    <div id="progressContainer">
+      <div id="progressBar"><div id="progressFill"></div></div>
+      <div id="progressText">در حال به‌روزرسانی...</div>
+    </div>
+    <div id="statusMessage" class="status-message"></div>
+  </div>
+
+  <!-- فرم افزودن کالا -->
+  <div class="section">
+    <h3>افزودن کالا</h3>
+    <div>
+      <label>شماره فاکتور:</label>
+      <input type="text" id="invoiceNumber" readonly style="width: 100px; background: #e9ecef;">
+      <label>نام خریدار:</label>
+      <input type="text" id="buyerName" placeholder="نام خریدار را وارد کنید" style="width: 200px;" onchange="saveLocalChanges()">
+      <label>تاریخ:</label>
+      <input type="date" id="invoiceDate" onchange="saveLocalChanges()">
+    </div>
+
+    <form id="productForm">
+      <div class="form-row single-line">
+        <div class="form-group">
+          <label>لینک محصول (URL):</label>
+          <input type="url" id="urlInput" placeholder="مثال: https://eshop.eca.ir/..." required>
+        </div>
+
+        <div class="separator"></div>
+
+        <div class="form-group">
+          <label>تعداد / طول :</label>
+          <input type="number" id="quantityInput" value="1" min="0.01" step="0.01" disabled>
+        </div>
+
+        <div class="form-group">
+          <label>نوع واحد:</label>
+          <select id="unitType" onchange="toggleUnitSection()">
+            <option value="عدد">عدد (استاندارد)</option>
+            <option value="متر">متر (مثل سیم - محاسبه نسبت طول)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <div id="unitSection" class="unit-section">
+            <label>طول بسته:</label>
+            <input type="number" id="packageLength" min="0.01" step="0.01" placeholder="مثال: 10">
+          </div>
+        </div>
+
+        <div class="form-group btn-group">
+          <button type="button" class="services-btn" onclick="pasteFromClipboard()">کلیپ بورد</button>
+        </div>
+        <div class="form-group btn-group">
+          <button type="button" class="services-btn" onclick="enableQuantity()">تعداد دلخواه</button>
+        </div>
+        <div class="form-group btn-group">
+          <button class="services-btn" type="submit">اضافه کن</button>
+        </div>
+        <div class="form-group btn-group">
+          <button class="services-btn" onclick="toggleServices()">خدمات</button>
+        </div>
+        <div class="form-group btn-group">
+          <button id="toggleSortBtn" class="services-btn" onclick="togglePrependMode()">جدیدترین اول</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- بخش خدمات -->
+  <div id="servicesSection" class="section">
+    <h3>افزودن خدمت</h3>
+    <form id="serviceForm">
+      <label>عنوان خدمت:</label><br>
+      <input type="text" id="serviceTitle" required><br>
+      <label>اجرت واحد (ریال):</label><br>
+      <input type="number" id="serviceFee" min="0" required><br>
+      <label>تعداد / زمان:</label><br>
+      <input type="number" id="serviceQty" value="1" min="0.01" step="0.01" disabled><br>
+      <button type="button" class="custom-qty-btn" onclick="enableServiceQty()">تعداد دلخواه</button><br>
+      <div class="services-saved">
+        <label>جستجو در خدمات ذخیره‌شده:</label><br>
+        <input type="text" id="serviceSearch" oninput="filterSavedServices()"><br>
+        <select id="savedServices" onchange="loadSavedService()">
+          <option value="">انتخاب خدمت...</option>
+        </select>
+        <button type="button" onclick="addSavedService()">افزودن</button>
+        <button type="button" id="deleteServiceBtn" class="delete-service-btn" onclick="deleteSelectedService()">حذف خدمت</button>
+      </div>
+      <label><input type="checkbox" id="saveServiceCheckbox"> ذخیره خدمت جدید برای آینده</label><br>
+      <button type="submit">اضافه کن به خدمات</button>
+    </form>
+    <div class="merge-checkbox">
+      <label><input type="checkbox" id="mergeServices" onchange="toggleMerge()"> اضافه کردن خدمات به فاکتور کالا</label>
+    </div>
+    <table id="servicesTable" style="display: none;">
+      <thead>
+        <tr>
+          <th>ردیف</th>
+          <th>عنوان خدمت</th>
+          <th>تعداد / زمان</th>
+          <th>اجرت (ریال)</th>
+          <th>جمع خدمت (ریال)</th>
+          <th>عملیات</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <div class="total" id="servicesTotal">مجموع خدمات: ۰ ریال</div>
+  </div>
+
+  <!-- جدول فاکتور کالا -->
+  <table id="invoiceTable" style="display: none;">
+    <thead>
+      <tr>
+        <th>شماره ردیف</th>
+        <th>نام کالا</th>
+        <th>تعداد / طول</th>
+        <th>واحد</th>
+        <th>مبلغ واحد (ریال)</th>
+        <th>جمع (ریال)</th>
+        <th>عملیات</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+  <div class="total" id="totalAmount">مجموع کل: ۰ ریال</div>
+  <div class="section" id="notesSection">
+    <h3>توضیحات فاکتور</h3>
+    <div id="editableNote" ondblclick="enableNoteEdit()" class="note-display">برای افزودن توضیحات، دوبار کلیک کنید...</div>
+    <textarea id="noteInput" style="display:none;" rows="4"></textarea>
+    <button id="saveNoteBtn" style="display:none;" onclick="saveNote()">تأیید توضیحات</button>
+  </div>
+  <div class="section" id="summarySection">
+    <h3>خلاصه مالی</h3>
+    <label>بدهی پیشین (ریال):</label>
+    <input type="number" id="previousDebt" value="0" onchange="updateFinalTotal()"><br>
+    <label>بستانکار (ریال):</label>
+    <input type="number" id="creditAmount" value="0" onchange="updateFinalTotal()"><br>
+    <div class="total final-total" id="finalPayable">جمع مبلغ قابل پرداخت: ۰ ریال</div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+</body>
+</html>

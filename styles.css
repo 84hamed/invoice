@@ -1,0 +1,657 @@
+/* استایل‌های کلی */
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    margin: 20px;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    color: #333;
+    line-height: 1.4;
+}
+
+/* استایل جدول */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    border: 1px solid #e0e0e0;
+    padding: 12px 8px;
+    text-align: center;
+    cursor: pointer;
+}
+
+th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 600;
+}
+
+
+/* استایل عناصر فرم عمومی */
+input, button, select {
+    padding: 8px 12px;
+    margin: 4px 0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* استایل مجموع */
+.total {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-top: 10px;
+    color: #667eea;
+    text-align: right;
+    padding: 10px;
+    background: rgba(102, 126, 234, 0.05);
+    border-radius: 6px;
+}
+
+/* دکمه‌های ویرایش */
+.edit-btn {
+    background: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%);
+    color: black;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+    transition: transform 0.2s;
+}
+
+.edit-btn:hover {
+    transform: scale(1.05);
+}
+
+.update-btn {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.delete-btn {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.refresh-price-btn {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.delete-service-btn {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    display: none;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+/* استایل بخش‌ها */
+.section {
+    margin-bottom: 20px;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.section h3 {
+    margin-top: 0;
+    color: #667eea;
+    font-size: 1.3em;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+    padding-bottom: 10px;
+}
+
+.invoice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+/* دکمه‌های اصلی */
+.print-btn, .save-btn, .load-btn, .new-invoice-btn, .update-prices-btn, .undo-btn, .services-btn {
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.print-btn {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+}
+
+.save-btn {
+    background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+    color: white;
+}
+
+.load-btn {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+}
+
+.new-invoice-btn {
+    background: linear-gradient(135deg, #fd7e14 0%, #e65500 100%);
+    color: white;
+}
+
+.update-prices-btn {
+    background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+    color: white;
+}
+
+.undo-btn {
+    background: linear-gradient(135deg, #ffc107 0%, #ff8c00 100%);
+    color: black;
+    display: none;
+}
+
+.services-btn {
+    background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+    color: white;
+    margin-top: 15px;
+    width: 100%;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* لیست فاکتورها */
+#invoicesList {
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+#invoicesList li {
+    margin: 5px 0;
+    cursor: pointer;
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: all 0.3s;
+    border-left: 4px solid #e9ecef;
+}
+
+#invoicesList li:hover {
+    background: #e9ecef;
+    border-left-color: #667eea;
+}
+
+#invoicesList li.selected {
+    background: linear-gradient(135deg, #007bff 0%, #0056b3 100%);
+    color: white;
+    border-left-color: white;
+}
+
+/* بخش واحد */
+.unit-section {
+    display: none;
+    margin-top: 8px;
+}
+
+.unit-section.active {
+    display: block;
+}
+
+/* دکمه تعداد دلخواه */
+.custom-qty-btn {
+    background: linear-gradient(135deg, #6f42c1 0%, #5a2d91 100%);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+    height: 40px;
+}
+
+/* نوار پیشرفت */
+#progressContainer {
+    display: none;
+    margin: 10px 0;
+}
+
+#progressBar {
+    width: 100%;
+    background: #e9ecef;
+    height: 8px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+#progressFill {
+    background: linear-gradient(90deg, #20c997 0%, #17a2b8 100%);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s;
+}
+
+#progressText {
+    text-align: center;
+    margin-top: 5px;
+    font-weight: bold;
+    color: #667eea;
+    font-size: 14px;
+}
+
+/* بخش خدمات */
+#servicesSection {
+    display: none;
+}
+
+.merge-checkbox {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.services-saved {
+    margin: 10px 0;
+}
+
+#serviceSearch {
+    width: 200px;
+    border-radius: 6px;
+}
+
+/* ورودی ویرایش */
+.editing-input {
+    width: 100%;
+    text-align: center;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+/* پیام‌های وضعیت */
+.status-message {
+    margin: 5px 0;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    display: none;
+    transition: opacity 0.3s;
+}
+
+.status-message.show {
+    display: block;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.error-message {
+    background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+    color: #721c24;
+    border-left: 4px solid #dc3545;
+}
+
+/* استایل‌های فرم افزودن کالا (همه در یک سطر) */
+.single-line {
+    display: flex;
+    align-items: flex-end;
+    gap: 15px; /* افزایش فاصله برای مرتب بودن */
+    flex-wrap: nowrap; /* جلوگیری از wrap برای یک سطر */
+    align-content: center;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+    max-width: 250px; /* افزایش حداکثر عرض برای فضای بیشتر */
+}
+
+.form-group.full-width {
+    flex: 1.2; /* کمی بیشتر برای unitSection */
+}
+
+.form-group.btn-group {
+    flex: 0.8; /* دکمه‌ها کوچک‌تر */
+    max-width: 130px; /* افزایش عرض دکمه‌ها برای اندازه مناسب */
+}
+
+.form-group label {
+    font-weight: 600;
+    font-size: 12px; /* کوچک‌تر برای فشردگی */
+    color: #555;
+    margin-bottom: 2px;
+}
+
+.form-group input,
+.form-group select,
+.form-group button {
+    padding: 8px 12px; /* padding مناسب برای اندازه خوب */
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 13px;
+    height: 35px; /* ارتفاع کمتر */
+    box-sizing: border-box;
+}
+
+.form-group input[type="url"] {
+    width: 100%;
+    font-family: monospace;
+    min-width: 400px; /* حداکثر عرض برای لینک - افزایش از 250px */
+    flex: 2; /* اولویت بیشتر در flex برای اشغال فضای بیشتر در سطر */
+}
+
+/* استاندارد کردن فیلد تعداد / طول */
+#quantityInput {
+    width: 80px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* فیلد طول بسته */
+#packageLength {
+    width: 100px;
+}
+
+.form-group button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+    height: 35px;
+    width: 100%;
+}
+
+.form-group button:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-1px);
+}
+
+#productForm {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 80px; /* محدود به یک سطر تقریبی */
+}
+
+#unitSection {
+    order: 4; /* بعد از select */
+    width: 100%;
+    margin-top: 0; /* بدون حاشیه اضافی */
+    display: contents; /* برای inline در سطر */
+}
+
+#unitSection.active {
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-10px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+/* responsive برای موبایل */
+@media (max-width: 768px) {
+    .single-line {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .form-group {
+        max-width: none;
+        flex: 1 1 100%;
+    }
+
+    .form-group.full-width,
+    .form-group.btn-group {
+        flex: 1 1 50%;
+    }
+
+    #productForm {
+        max-height: none;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    .form-group input[type="url"] {
+        min-width: 100%;
+        flex: 1;
+    }
+}
+
+/* بهبود کلی مدرن */
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+/* جداکننده جدید */
+.separator {
+    border-left: 0px solid #ddd; /* خط عمودی جداکننده */
+    height: 35px; /* ارتفاع متناسب با فیلدها */
+    margin-right: 253px;
+}
+
+.save-current-btn {
+    background: linear-gradient(135deg, #28a745 0%, #218838 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.save-current-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* انیمیشن موفقیت */
+.success-popup {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #e6ffe6;
+  border: 2px solid #4caf50;
+  border-radius: 15px;
+  padding: 20px 40px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(76, 175, 80, 0.5);
+  animation: fadeInOut 2.5s ease-in-out;
+  z-index: 9999;
+}
+
+.success-checkmark .check-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 4px solid #4caf50;
+  position: relative;
+  box-sizing: content-box;
+}
+.success-checkmark .check-icon .icon-line {
+  height: 5px;
+  background-color: #4caf50;
+  display: block;
+  border-radius: 2px;
+  position: absolute;
+}
+.success-checkmark .check-icon .line-tip {
+  width: 20px;
+  left: 14px;
+  top: 28px;
+  transform: rotate(45deg);
+}
+.success-checkmark .check-icon .line-long {
+  width: 35px;
+  right: 8px;
+  top: 22px;
+  transform: rotate(-45deg);
+}
+.success-checkmark p {
+  margin-top: 10px;
+  font-weight: bold;
+  color: #2e7d32;
+}
+
+/* انیمیشن خطا */
+.error-popup {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #ffebee;
+  border: 2px solid #e53935;
+  border-radius: 15px;
+  padding: 15px 30px;
+  color: #b71c1c;
+  font-weight: bold;
+  animation: fadeInOut 2.5s ease-in-out;
+  z-index: 9999;
+}
+
+/* fadeInOut animation */
+@keyframes fadeInOut {
+  0% {opacity: 0; transform: translate(-50%, -60%);}
+  10% {opacity: 1; transform: translate(-50%, -50%);}
+  90% {opacity: 1; transform: translate(-50%, -50%);}
+  100% {opacity: 0; transform: translate(-50%, -40%);}
+}
+
+@media print {
+  body {
+    background: white !important;
+    color: black !important;
+  }
+
+  .section,
+  .status-message,
+  .services-btn,
+  .undo-btn,
+  .print-btn,
+  .save-btn,
+  .load-btn,
+  .new-invoice-btn,
+  .update-prices-btn {
+    display: none !important; /* دکمه‌ها و بخش‌های غیرضروری چاپ نشوند */
+  }
+
+  table, th, td {
+    border: 1px solid black !important;
+    color: black !important;
+  }
+
+  th, td {
+    display: table-cell !important;
+  }
+
+  #invoiceTable,
+  #servicesTable {
+    display: table !important;
+  }
+
+  #invoiceTable th:nth-child(3),
+  #invoiceTable td:nth-child(3),
+  #servicesTable th:nth-child(3),
+  #servicesTable td:nth-child(3) {
+    display: table-cell !important; /* اطمینان از نمایش ستون تعداد */
+  }
+
+  #summarySection {
+    display: block !important;
+    margin-top: 20px;
+  }
+
+  #summarySection input {
+    display: none !important; /* مخفی کردن ورودی‌ها در چاپ */
+  }
+
+  #summarySection label {
+    display: inline-block;
+    margin-right: 10px;
+  }
+}
+
+@media print {
+  body {
+    font-size: var(--print-font-size, 15px);
+    transform: scale(0.8);
+    transform-origin: top left;
+  }
+}
+
+.note-display {
+  background: #f8f9fa;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  white-space: pre-wrap;
+}
+
+.final-total {
+  font-size: 18px;
+  font-weight: bold;
+  color: #c0392b;
+  margin-top: 10px;
+  border-top: 2px solid #c0392b;
+  padding-top: 10px;
+}
