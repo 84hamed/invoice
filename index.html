@@ -42,7 +42,7 @@
     <h3>افزودن کالا</h3>
     <div>
       <label>شماره فاکتور:</label>
-      <input type="text" id="invoiceNumber" readonly style="width: 100px; background: #e9ecef;">
+      <input type="text" id="invoiceNumber" style="width: 100px; background: #e9ecef;" onkeydown="handleInvoiceNumberKeydown(event)">
       <label>نام خریدار:</label>
       <input type="text" id="buyerName" placeholder="نام خریدار را وارد کنید" style="width: 200px;" onchange="saveLocalChanges()">
       <label>تاریخ:</label>

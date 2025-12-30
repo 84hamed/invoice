@@ -1051,7 +1051,7 @@ document.getElementById("save-invoice").addEventListener("click", function () {
   // نمایش انیمیشن موفقیت
   showSuccessAnimation("فاکتور با موفقیت ذخیره شد ✅");
 });
-
+/*
 // === انیمیشن موفقیت ===
 function showSuccessAnimation(message) {
   const popup = document.createElement("div");
@@ -1081,6 +1081,7 @@ function showError(message) {
 
   setTimeout(() => popup.remove(), 2500);
 }
+*/
 // تابع به‌روزرسانی همه قیمت‌ها (فقط کالا)
 async function updateAllPrices() {
     if (tableBody.rows.length === 0) {
@@ -1307,6 +1308,49 @@ function updateFinalTotal() {
   const final = baseTotal + debt - credit;
 
   document.getElementById("finalPayable").textContent = `جمع مبلغ قابل پرداخت: ${final.toLocaleString()} ریال`;
+  // تابع برای مدیریت فشار دادن اینتر در فیلد شماره فاکتور
+function handleInvoiceNumberKeydown(event) {
+    if (event.key === 'Enter' || event.keyCode === 13) {
+        event.preventDefault(); // جلوگیری از رفتار پیش‌فرض (مثل submit فرم)
+        const newNumber = event.target.value.trim();
+        
+        if (newNumber === '') {
+            alert('شماره فاکتور نمی‌تواند خالی باشد!');
+            // برگرداندن به مقدار قبلی
+            event.target.value = currentInvoice ? currentInvoice.number : '';
+            return;
+        }
+        
+        // به‌روزرسانی شماره در شیء currentInvoice
+        if (currentInvoice) {
+            currentInvoice.number = newNumber;
+        }
+        
+        // ذخیره خودکار تغییرات محلی (اگر تابعی به نام saveLocalChanges وجود دارد)
+        if (typeof saveLocalChanges === 'function') {
+            saveLocalChanges();
+        }
+        
+        // خارج کردن فوکوس تا فیلد دوباره مثل فقط خواندنی به نظر برسد
+        event.target.blur();
+        
+        showStatus('شماره فاکتور با موفقیت تغییر کرد.', false);
+    }
+}
+
+// اصلاح کوچک در تابع newInvoice() برای اطمینان از مقدار اولیه درست
+// (اگر قبلاً این خط وجود دارد، فقط مطمئن شو که هست)
+function newInvoice() {
+    // ... کدهای قبلی ...
+    document.getElementById('invoiceNumber').value = currentInvoice.number;
+    // فوکوس اولیه نده تا فیلد ثابت بماند
+}
+
+// اصلاح کوچک در توابع بارگیری (loadInvoiceData یا مشابه)
+// تا بعد از بارگیری، مقدار فیلد درست باشد
+// (این خط معمولاً وجود دارد، فقط چک کن)
+document.getElementById('invoiceNumber').value = currentInvoice.number;
+
 }
 ///////////////////////////////////////////////
 
